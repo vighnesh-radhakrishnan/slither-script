@@ -73,9 +73,14 @@ function changeDirection(event) {
 document.addEventListener("keydown", changeDirection);
 
 function advanceSnake() {
-  const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+  const head = { x: snake[0].x + dx, y: snake[0].y };
   snake.unshift(head);
-  snake.pop();
+  const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
+  if (didEatFood) {
+    createFood();
+  } else {
+    snake.pop();
+  }
 }
 
 function randomTen(min, max) {
@@ -113,8 +118,8 @@ function drawSnakePart(snakePart) {
   ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
-main();
 createFood();
+main();
 
 function main() {
   setTimeout(function onTick() {
