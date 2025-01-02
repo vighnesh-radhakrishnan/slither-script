@@ -56,15 +56,11 @@ function drawSnakePart(snakePart) {
   ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
-setTimeout(function onTick() {
-  clearCanvas();
-  advanceSnake();
-  drawSnake();
-}, 100);
-setTimeout(function onTick() {
-  clearCanvas();
-  advanceSnake();
-  drawSnake();
-}, 100);
-
-drawSnake();
+function main() {
+  setTimeout(function onTick() {
+    clearCanvas();
+    advanceSnake();
+    drawSnake();
+    main();
+  }, 100);
+}
