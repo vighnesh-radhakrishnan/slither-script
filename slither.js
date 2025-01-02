@@ -13,6 +13,10 @@ let snake = [
   { x: 110, y: 150 },
 ];
 
+// Food x-coordinate
+let foodX;
+// Food y-coordinate
+let foodY;
 // Horizontal velocity
 let dx = 0;
 // Vertical velocity
@@ -74,6 +78,26 @@ function advanceSnake() {
   snake.pop();
 }
 
+function randomTen(min, max) {
+  return Math.round((Math.random() * (max - min) + min) / 10) * 10;
+}
+
+function createFood() {
+  foodX = randomTen(0, gameCanvas.width - 10);
+  foodY = randomTen(0, gameCanvas.height - 10);
+  snake.forEach(function isFoodOnSnake(part) {
+    const foodIsOnSnake = part.x == foodX && part.y == foodY;
+    if (foodIsOnSnake) createFood();
+  });
+}
+
+function drawFood() {
+  ctx.fillStyle = "red";
+  ctx.strokestyle = "darkred";
+  ctx.fillRect(foodX, foodY, 10, 10);
+  ctx.strokeRect(foodX, foodY, 10, 10);
+}
+
 // Draws the snake on the canvas
 function drawSnake() {
   snake.forEach(drawSnakePart);
@@ -90,10 +114,12 @@ function drawSnakePart(snakePart) {
 }
 
 main();
+createFood();
 
 function main() {
   setTimeout(function onTick() {
     clearCanvas();
+    drawFood();
     advanceSnake();
     drawSnake();
     main();
