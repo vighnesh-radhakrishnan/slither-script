@@ -24,7 +24,7 @@ var gameCanvas = document.getElementById("gameCanvas");
 var ctx = gameCanvas.getContext("2d");
 
 // Initialize the canvas
-function initCanvas() {
+function clearCanvas() {
   // Set the canvas fillccolor
   ctx.fillStyle = CANVAS_BACKGROUND_COLOR;
   // Set the canvas border
