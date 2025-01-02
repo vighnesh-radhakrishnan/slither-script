@@ -73,7 +73,8 @@ function changeDirection(event) {
 document.addEventListener("keydown", changeDirection);
 
 function advanceSnake() {
-  const head = { x: snake[0].x + dx, y: snake[0].y };
+  const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
   snake.unshift(head);
   const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
   if (didEatFood) {
@@ -118,8 +119,8 @@ function drawSnakePart(snakePart) {
   ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
-createFood();
 main();
+createFood();
 
 function main() {
   setTimeout(function onTick() {
