@@ -12,6 +12,11 @@ let snake = [
   { x: 110, y: 150 },
 ];
 
+// Horizontal velocity
+let dx = 10;
+// Vertical velocity
+let dy = 0;
+
 // Get the canvas element
 var gameCanvas = document.getElementById("gameCanvas");
 
@@ -28,6 +33,12 @@ function initCanvas() {
   // Draw filled rectangle with border for the entire canvas
   ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
   ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+}
+
+function advanceSnake() {
+  const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+  snake.unshift(head);
+  snake.pop();
 }
 
 // Draws the snake on the canvas
@@ -47,4 +58,14 @@ function drawSnakePart(snakePart) {
 
 // Initialize and draw
 initCanvas();
+
+// Move on step to the right
+advanceSnake();
+// Change vertical velocity to 0
+dx = 0;
+// Change horizontal velocity to 10
+dy = -10;
+// Move one step up
+advanceSnake();
+
 drawSnake();
