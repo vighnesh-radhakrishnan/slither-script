@@ -30,3 +30,11 @@ git clone https://github.com/your-username/slither-script.git
 cd slither-script
 open index.html
 ```
+
+## Contributing
+
+Feel free to fork the repository and submit pull requests for any improvements or bug fixes. Contributions are always welcome!
+
+<!-- ## License
+
+This project is licensed under the MIT License. -->
