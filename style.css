@@ -19,3 +19,16 @@ canvas {
   text-shadow: 2px 2px #aaa;
   margin-bottom: 20px;
 }
+
+footer {
+  font-size: 14px;
+  text-align: center;
+  color: #555;
+  padding: 10px;
+  margin-top: 40px;
+  background-color: #f4f4f4;
+}
+
+footer p {
+  margin: 0;
+}
