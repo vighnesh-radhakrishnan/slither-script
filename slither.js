@@ -45,7 +45,7 @@ function clearCanvas() {
 function didGameEnd() {
   for (let i = 4; i < snake.length; i++) {
     const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
-    if (didCollide) return true;
+    if (didCollide) return { status: true, message: "Bitten!" };
   }
 
   const hitLeftWall = snake[0].x < 0;
@@ -53,7 +53,11 @@ function didGameEnd() {
   const hitToptWall = snake[0].y < 0;
   const hitBottomWall = snake[0].y > gameCanvas.height - 10;
 
-  return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+  if (hitLeftWall || hitRightWall || hitToptWall || hitBottomWall) {
+    return { status: true, message: "Splat!" };
+  }
+
+  return { status: false, message: "" };
 }
 
 function changeDirection(event) {
@@ -141,7 +145,12 @@ main();
 createFood();
 
 function main() {
-  if (didGameEnd()) return;
+  const gameEndResult = didGameEnd();
+
+  if (gameEndResult.status) {
+    document.getElementById("score").innerHTML = gameEndResult.message;
+    return;
+  }
 
   setTimeout(function onTick() {
     clearCanvas();
