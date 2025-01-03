@@ -42,6 +42,20 @@ function clearCanvas() {
   ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
 
+function didGameEnd() {
+  for (let i = 4; i < snake.length; i++) {
+    const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
+    if (didCollide) return true;
+  }
+
+  const hitLeftWall = snake[0].x < 0;
+  const hitRightWall = snake[0].x > gameCanvas.width - 10;
+  const hitToptWall = snake[0].y < 0;
+  const hitBottomWall = snake[0].y > gameCanvas.height - 10;
+
+  return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+}
+
 function changeDirection(event) {
   const LEFT_KEY = 37;
   const RIGHT_KEY = 39;
@@ -127,6 +141,8 @@ main();
 createFood();
 
 function main() {
+  if (didGameEnd()) return;
+
   setTimeout(function onTick() {
     clearCanvas();
     drawFood();
