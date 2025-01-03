@@ -2,6 +2,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   margin: 0;
   background-color: #f4f4f4;
@@ -9,4 +10,12 @@ body {
 
 canvas {
   border: 1px solid black;
+}
+
+#score {
+  font-size: 6rem;
+  font-family: "Fondamento", cursive;
+  color: #202020;
+  text-shadow: 2px 2px #aaa;
+  margin-bottom: 20px;
 }

@@ -21,6 +21,8 @@ let foodY;
 let dx = 0;
 // Vertical velocity
 let dy = -10;
+// score
+let score = 0;
 
 // Get the canvas element
 var gameCanvas = document.getElementById("gameCanvas");
@@ -78,6 +80,8 @@ function advanceSnake() {
   snake.unshift(head);
   const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
   if (didEatFood) {
+    score += 10;
+    document.getElementById("score").innerHTML = score;
     createFood();
   } else {
     snake.pop();
