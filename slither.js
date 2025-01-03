@@ -23,6 +23,8 @@ let dx = 0;
 let dy = -10;
 // score
 let score = 0;
+// change direction flag to solve quick direction change bug
+let changingDirection = false;
 
 // Get the canvas element
 var gameCanvas = document.getElementById("gameCanvas");
@@ -70,6 +72,11 @@ function changeDirection(event) {
   const goingDown = dy === 10;
   const goingRight = dx === 10;
   const goingLeft = dx === -10;
+
+  // check prevent quick reverse direction bug
+  if (changingDirection) return;
+  changingDirection = true;
+
   if (keyPressed === LEFT_KEY && !goingRight) {
     dx = -10;
     dy = 0;
@@ -153,6 +160,7 @@ function main() {
   }
 
   setTimeout(function onTick() {
+    changingDirection = false;
     clearCanvas();
     drawFood();
     advanceSnake();
