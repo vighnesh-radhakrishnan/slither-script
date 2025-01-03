@@ -1,6 +1,6 @@
 # Slither-Script
 
-Slither-Script is a simple implementation of the classic Snake game built using HTML, CSS, and JavaScript. The goal of the game is to control a snake, eat food, and avoid colliding with the walls or the snake's own body. As the snake eats food, it grows longer, making the game more challenging as you progress.
+Slither-Script is a simple rendition of the classic Snake game built using HTML, CSS, and JavaScript. The goal of the game is to control a snake, eat food, and avoid colliding with the walls or the snake's own body. As the snake eats food, it grows longer, making the game more challenging as you progress.
 Try out **[slither-script](https://vighnesh-radhakrishnan.github.io/slither-script/)**.
 
 ## Features
