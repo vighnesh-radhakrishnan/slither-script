@@ -177,13 +177,12 @@ function drawSnakePart(snakePart) {
 }
 
 function levelUp() {
-  if (snake.length >= LEVEL_UP_LENGTH - currentLevel) {
+  if (snake.length >= LEVEL_UP_LENGTH) {
     currentLevel++;
     const colorIndex = (currentLevel - 2) % SNAKE_COLORS.length; // Adjust index to start with the first color (red)
     currentSnakeColor = SNAKE_COLORS[colorIndex];
     currentBorderColor = SNAKE_BORDER_COLORS[colorIndex];
     gameSpeed = Math.max(gameSpeed - 10, MIN_GAME_SPEED); // Increase speed
-    console.log("SPEED NOW", gameSpeed, currentLevel);
     snake.splice(4); // Reset the snake to default length
 
     // Check for game completion
