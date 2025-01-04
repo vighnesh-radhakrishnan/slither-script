@@ -4,38 +4,39 @@ const CANVAS_BACKGROUND_COLOR = "white";
 const INITIAL_SNAKE_BORDER_COLOR = "darkgreen";
 const INITIAL_SNAKE_COLOR = "lightgreen";
 const SNAKE_BORDER_COLOR = "darkgreen";
-const LEVEL_UP_LENGTH = 5; // Length required to level up
+const LEVEL_UP_LENGTH = 15; // Length required to level up
 const MIN_GAME_SPEED = 20; // Minimum speed
+let currentSnakeColor = INITIAL_SNAKE_COLOR;
+let currentBorderColor = INITIAL_SNAKE_BORDER_COLOR;
+let currentLevel = 1;
 const SNAKE_COLORS = [
-  "red",
+  "#960505",
   "blue",
-  "orange",
+  "#f29222",
   "purple",
-  "pink",
-  "black",
+  "#f7e592",
+  "#700351",
   "cyan",
-  "yellow",
-  "darkgreen",
+  "#d663f2",
+  "#89e01d",
 ];
 const SNAKE_BORDER_COLORS = [
-  "#FF6666",
+  "white",
   "#ADD8E6",
-  "#FFA07A",
+  "#261004",
   "#DDA0DD",
-  "#FFB6C1",
-  "#D3D3D3",
-  "#ADD8E6",
-  "#FFFFE0",
-  "darkgreen",
+  "yellow",
+  "#f511b4",
+  "#5500ff",
+  "#2c0236",
+  "#2b4a05",
 ];
 
 let snake = [
-  { x: 150, y: 140 },
   { x: 150, y: 150 },
   { x: 140, y: 150 },
   { x: 130, y: 150 },
   { x: 120, y: 150 },
-  { x: 110, y: 150 },
 ];
 
 // Food x-coordinate
@@ -47,7 +48,7 @@ let dx = 0;
 // Vertical velocity
 let dy = -10;
 // game speed
-let gameSpeed = 160;
+let gameSpeed = 120;
 // score
 let score = 0;
 // change direction flag to solve quick direction change bug
@@ -154,8 +155,8 @@ function createFood() {
 }
 
 function drawFood() {
-  ctx.fillStyle = "red";
-  ctx.strokestyle = "darkred";
+  ctx.fillStyle = "#0cf5c6";
+  ctx.strokeStyle = "#056350";
   ctx.fillRect(foodX, foodY, 10, 10);
   ctx.strokeRect(foodX, foodY, 10, 10);
 }
@@ -167,12 +168,32 @@ function drawSnake() {
 
 // Draws a part of the snake on the canvas
 function drawSnakePart(snakePart) {
-  ctx.fillStyle = SNAKE_COLOR;
-  ctx.strokestyle = SNAKE_BORDER_COLOR;
+  ctx.fillStyle = currentSnakeColor;
+  ctx.strokeStyle = currentBorderColor;
 
   // snake dimension set to 10x10
   ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
   ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+}
+
+function levelUp() {
+  if (snake.length >= LEVEL_UP_LENGTH - currentLevel) {
+    currentLevel++;
+    const colorIndex = (currentLevel - 2) % SNAKE_COLORS.length; // Adjust index to start with the first color (red)
+    currentSnakeColor = SNAKE_COLORS[colorIndex];
+    currentBorderColor = SNAKE_BORDER_COLORS[colorIndex];
+    gameSpeed = Math.max(gameSpeed - 10, MIN_GAME_SPEED); // Increase speed
+    console.log("SPEED NOW", gameSpeed, currentLevel);
+    snake.splice(4); // Reset the snake to default length
+
+    // Check for game completion
+    if (gameSpeed === MIN_GAME_SPEED && currentLevel > SNAKE_COLORS.length) {
+      const scoreElement = document.getElementById("score");
+      scoreElement.innerHTML = "Final Score: " + score;
+      return true; // Game finished
+    }
+  }
+  return false; // Game continues
 }
 
 main();
@@ -184,6 +205,10 @@ function main() {
   if (gameEndResult.status) {
     document.getElementById("score").innerHTML = gameEndResult.message;
     return;
+  }
+
+  if (levelUp()) {
+    return; // Exit if game is finished
   }
 
   setTimeout(function onTick() {
