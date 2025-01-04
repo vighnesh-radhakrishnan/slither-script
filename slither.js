@@ -1,8 +1,33 @@
 /** CONSTANTS **/
 const CANVAS_BORDER_COLOR = "black";
 const CANVAS_BACKGROUND_COLOR = "white";
-const SNAKE_COLOR = "lightgreen";
+const INITIAL_SNAKE_BORDER_COLOR = "darkgreen";
+const INITIAL_SNAKE_COLOR = "lightgreen";
 const SNAKE_BORDER_COLOR = "darkgreen";
+const LEVEL_UP_LENGTH = 5; // Length required to level up
+const MIN_GAME_SPEED = 20; // Minimum speed
+const SNAKE_COLORS = [
+  "red",
+  "blue",
+  "orange",
+  "purple",
+  "pink",
+  "black",
+  "cyan",
+  "yellow",
+  "darkgreen",
+];
+const SNAKE_BORDER_COLORS = [
+  "#FF6666",
+  "#ADD8E6",
+  "#FFA07A",
+  "#DDA0DD",
+  "#FFB6C1",
+  "#D3D3D3",
+  "#ADD8E6",
+  "#FFFFE0",
+  "darkgreen",
+];
 
 let snake = [
   { x: 150, y: 140 },
@@ -21,6 +46,8 @@ let foodY;
 let dx = 0;
 // Vertical velocity
 let dy = -10;
+// game speed
+let gameSpeed = 160;
 // score
 let score = 0;
 // change direction flag to solve quick direction change bug
@@ -166,7 +193,7 @@ function main() {
     advanceSnake();
     drawSnake();
     main();
-  }, 100);
+  }, gameSpeed);
 }
 
 drawSnake();
