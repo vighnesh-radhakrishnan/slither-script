@@ -176,6 +176,34 @@ function drawSnakePart(snakePart) {
   ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
+const replayButton = document.getElementById("replayButton");
+
+function resetGame() {
+  // Reset game state
+  snake = [
+    { x: 150, y: 150 },
+    { x: 140, y: 150 },
+    { x: 130, y: 150 },
+    { x: 120, y: 150 },
+  ];
+  dx = 0;
+  dy = -10;
+  gameSpeed = 120;
+  score = 0;
+  currentLevel = 1;
+  currentSnakeColor = INITIAL_SNAKE_COLOR;
+  currentBorderColor = INITIAL_SNAKE_BORDER_COLOR;
+
+  // Reset score display
+  document.getElementById("score").innerHTML = score;
+
+  // Create new food and restart the game
+  createFood();
+  replayButton.disabled = true; // Disable replay button
+  replayButton.style.display = "none"; // Hide the button
+  main();
+}
+
 function levelUp() {
   if (snake.length >= LEVEL_UP_LENGTH) {
     currentLevel++;
@@ -203,6 +231,8 @@ function main() {
 
   if (gameEndResult.status) {
     document.getElementById("score").innerHTML = gameEndResult.message;
+    replayButton.disabled = false; // Enable replay button
+    replayButton.style.display = "block"; // Show the button
     return;
   }
 
@@ -219,5 +249,5 @@ function main() {
     main();
   }, gameSpeed);
 }
-
+replayButton.addEventListener("click", resetGame);
 drawSnake();
