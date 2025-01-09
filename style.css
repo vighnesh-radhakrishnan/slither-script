@@ -38,16 +38,12 @@ canvas {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
+  display: none;
 }
 
 #replayButton img {
   width: 24px;
   height: 24px;
-}
-
-#replayButton:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
 }
 
 #replayButton:hover:enabled {
@@ -61,7 +57,7 @@ canvas {
   background-color: white;
   border: 2px solid #202020;
   color: #202020;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: bold;
   width: 50px;
   height: 50px;
