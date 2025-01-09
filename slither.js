@@ -4,7 +4,7 @@ const CANVAS_BACKGROUND_COLOR = "white";
 const INITIAL_SNAKE_BORDER_COLOR = "darkgreen";
 const INITIAL_SNAKE_COLOR = "lightgreen";
 const SNAKE_BORDER_COLOR = "darkgreen";
-const LEVEL_UP_LENGTH = 15; // Length required to level up
+const LEVEL_UP_LENGTH = 6; // Length required to level up
 const MIN_GAME_SPEED = 20; // Minimum speed
 let currentSnakeColor = INITIAL_SNAKE_COLOR;
 let currentBorderColor = INITIAL_SNAKE_BORDER_COLOR;
@@ -196,6 +196,7 @@ function resetGame() {
 
   // Reset score display
   document.getElementById("score").innerHTML = score;
+  document.getElementById("level").innerHTML = currentLevel;
 
   // Create new food and restart the game
   createFood();
@@ -210,6 +211,8 @@ function levelUp() {
     const colorIndex = (currentLevel - 2) % SNAKE_COLORS.length; // Adjust index to start with the first color (red)
     currentSnakeColor = SNAKE_COLORS[colorIndex];
     currentBorderColor = SNAKE_BORDER_COLORS[colorIndex];
+    document.getElementById("level").innerHTML = currentLevel;
+
     gameSpeed = Math.max(gameSpeed - 10, MIN_GAME_SPEED); // Increase speed
     snake.splice(4); // Reset the snake to default length
 
